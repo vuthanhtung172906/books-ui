@@ -1,6 +1,10 @@
 'use client';
 
-import { Query } from '@/src/__generated__/graphql';
+import {
+  BookDocument,
+  Query,
+  UpdateBookDocument,
+} from '@/src/__generated__/graphql';
 import { gql, useMutation, useSuspenseQuery } from '@apollo/client';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -48,7 +52,7 @@ const GET_BOOK_QUERY = gql`
 `;
 
 export default function Page({ params }: { params: { slug: string } }) {
-  const { data: bookData } = useSuspenseQuery<Query>(GET_BOOK_QUERY, {
+  const { data: bookData } = useSuspenseQuery<Query>(BookDocument, {
     variables: {
       id: params.slug,
     },
@@ -80,7 +84,7 @@ export default function Page({ params }: { params: { slug: string } }) {
       [name]: value,
     }));
   };
-  const [newBook, { data, loading, error }] = useMutation(UPDATE_BOOK_MUTATION);
+  const [newBook, { data, loading, error }] = useMutation(UpdateBookDocument);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();

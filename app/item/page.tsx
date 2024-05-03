@@ -1,5 +1,6 @@
 'use client';
 
+import { CreateBookDocument } from '@/src/__generated__/graphql';
 import { gql, useMutation } from '@apollo/client';
 import * as React from 'react';
 
@@ -46,7 +47,7 @@ export default function Page(props: IPageProps) {
       [name]: value,
     }));
   };
-  const [newBook, { data, loading, error }] = useMutation(CREATE_BOOK_MUTATION);
+  const [newBook, { data, loading, error }] = useMutation(CreateBookDocument);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
